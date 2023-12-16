@@ -1,7 +1,5 @@
-import { verify } from "crypto";
 import mongoose from "mongoose";
-import { unique } from "next/dist/build/utils";
-import { type } from "os";
+
 const userSchema = new mongoose.Schema({
     username: {
         type: String,
@@ -30,5 +28,5 @@ const userSchema = new mongoose.Schema({
     verifyToken: String,
     verifyTokenExpiry: Date,
 })
-const User = mongoose.models.users || mongoose.model("User", userSchema);
+const User = mongoose.models.users || mongoose.model("users", userSchema);
 export default User;

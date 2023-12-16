@@ -3,7 +3,7 @@ import Link from "next/link";
 import React,{useEffect} from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
-import { axios } from "axios";
+import axios  from "axios";
 
 export default function SignUpPage() {
     const router = useRouter();
@@ -17,8 +17,9 @@ export default function SignUpPage() {
     const onSignUp = async () => {
         try{
             setLoading(true);
-            axios.post("/api/users/signup", user);
-
+            const response = await axios.post("api/users/signup", user);
+            console.log("Sign Up success", response.data);
+            router.push("/login")
         }catch(error: any){
             console.log("Signup failed", error.massage)
             toast.error(error.message);
@@ -65,7 +66,7 @@ export default function SignUpPage() {
                 placeholder="password"
             />
             <button onClick={onSignUp} className="p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600">
-                { buttonDisabled ? "No signup" : "Sign Up" }
+                {buttonDisabled ? "No signup" : "Sign Up" }
             </button>
             <Link href="/login">Visit login page</Link>
         </div>
